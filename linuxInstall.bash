@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Script for twitch_Hue,
+# Install Script for twitch-hue,
 #
 # written by linuxgemini
 

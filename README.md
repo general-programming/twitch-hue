@@ -1,4 +1,4 @@
-# twitch_Hue
+# twitch-hue
 Twitch Bot which changes colors of Philips Hue lamps based on cheers and subs.
 
 Dependecies
