@@ -3,8 +3,8 @@ const config = require("./config");
 const colorArray = require("./db/color.json");
 const colorEffects = require("./db/effect_colors.json");
 
-var status = 0;
-var jobQueue = [];
+let status = 0;
+let jobQueue = [];
 
 let client = new huejay.Client({
     host: config.hueIP,
@@ -38,6 +38,8 @@ function hueLamp(alertType) {
             alertName = alertType;
         }
 
+        let lampTimer = 0;
+
         var intervalID = setInterval(function () { // Loops until there is no jobs in queue
             config.hueLamps.map(function (lampID) {
                 changeColor(lampID, alertName);
@@ -66,7 +68,6 @@ function hueLamp(alertType) {
         }, colorEffects[alertName].blinkMS);
     }
 
-    lampTimer = 0;
 }
 
 function changeColor(lampID, color) {
@@ -86,9 +87,9 @@ function changeColor(lampID, color) {
 
             return client.lights.save(light);
         })
-        .then(light => {})
+        .then(light => {}) // todo (linuxgemini): log when color changes
         .catch(error => {
-            console.log('Something went wrong');
+            console.log("Something went wrong");
             console.log(error.stack);
         });
 }
