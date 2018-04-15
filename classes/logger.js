@@ -49,6 +49,9 @@ class logger {
     static sub(...args) {
         this.log(...args, "sub");
     }
+    static cheer(...args) {
+        this.log(...args, "cheer");
+    }
 }
 
 module.exports = logger;

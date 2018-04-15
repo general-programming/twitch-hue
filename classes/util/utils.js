@@ -23,7 +23,7 @@ class utils {
     }
 
     static returnSubType(months) {
-        if (!(months instanceof Number)) throw new Error("Given variable is NaN");
+        if (isNaN(months)) throw new Error("Given variable is NaN");
         let type;
         if (months >= 24) {
             type = 24;

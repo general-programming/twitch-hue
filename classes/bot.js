@@ -42,14 +42,15 @@ class TwitchBot extends tmi.Client {
             });
             this.on("cheer", (channel, userstate) => {
                 if (userstate.bits >= this.twhueOptions.cheerLimit) { //If users bit amount is not bigger that Hue trigger amount dont go in. You can change this in config.js
+                    this.logger.cheer(`${userstate.username} has cheered ${userstate.bits} bit(s)!`);
                     this.twhue.initLamp("cheer", userstate.bits);
                 }
             });
             process.on("uncaughtException", (err) => {
-                this.logger.error(err);
+                this.logger.error(err.stack);
             });
             process.on("unhandledRejection", (reason) => {
-                this.logger.error(reason);
+                this.logger.error(reason.stack);
             });
             resolve(true);
         });

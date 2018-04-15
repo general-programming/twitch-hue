@@ -8,6 +8,7 @@
 
 const huejay = require("huejay");
 const utils = require("./util/utils");
+const { isUndefined } = require("util");
 
 class twHue extends huejay.Client {
     constructor(options = {}, specialOpts = {
@@ -26,7 +27,7 @@ class twHue extends huejay.Client {
 
     initLamp(type, amount, colorType = null) {
         if (!type || !amount) throw new Error("One or more variables are not provided");
-        if (!(type instanceof String) || !(amount instanceof Number)) throw new Error("One or more variables are not valid.");
+        if (typeof(type) !== "string" || isNaN(amount)) throw new Error("One or more variables are not valid.");
 
         var subTier, cheerTier;
         switch (type) {
@@ -36,6 +37,7 @@ class twHue extends huejay.Client {
                 break;
             case "cheer":
                 cheerTier = utils.returnCheerTier(amount, this.hueOptions.cheerOptions);
+                if (isUndefined(cheerTier)) return null;
                 colorType = `bit_t${cheerTier}`;
                 break;
             case "override":
@@ -77,7 +79,7 @@ class twHue extends huejay.Client {
                 }
             }
         }, effectObject.blinkMS);
-
+        return true;
     }
 
     changeColor(lampID, color) {
