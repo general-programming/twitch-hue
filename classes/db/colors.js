@@ -17,7 +17,6 @@ module.exports = {
         isRandom: true,
         hueRange: [8000, 48000],
         brightness: 254,
-        hue: "[rnd]8000-48000",
         saturation: 233,
         faded_brightness: 150
     },

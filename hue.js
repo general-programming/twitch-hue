@@ -78,7 +78,8 @@ function changeColor(lampID, color) {
             // For random rainbow effect
             if (hue.indexOf("[rnd]") === 0) {
                 hue = hue.split("[rnd]").join("");
-                hue = Math.floor(Math.random() * (hue.split("-")[1] - hue.split("-")[0] + 1) + hue.split("-")[1]), light.hue = parseInt(hue);
+                hue = Math.floor(Math.random() * (hue.split("-")[1] - hue.split("-")[0] + 1) + hue.split("-")[1]);
+                light.hue = parseInt(hue);
             } else {
                 light.hue = colorArray[colorEffects[color].colorName].hue;
             }

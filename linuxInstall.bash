@@ -61,8 +61,8 @@ while [[ -z $yn1 ]]; do
 				printf "\nYour IP address is not local, try again.\n\n"
 				read -p "Please put your Hue Bridge IP Address here: " ip1
 			done
-			sed -i "11i  host:     '$ip1',               // Get this from setup_first.js" setup_second.js
-			sed -i "15ivar hueIP = '$ip1' //Enter Hue bridge IP inside of the quotes" config.js
+			sed -i "11i    host: \"$ip1\", // Get this from setup_first.js" setup_second.js
+			sed -i "15ilet hueIP = \"$ip1\"; //Enter Hue bridge IP inside of the quotes" config.js
 			sleep 1
 			while [[ -z $yn2 ]]; do
 				read -p "Are you on a terminal that you can copy outputs easily? [Yes / No] " yn2
@@ -81,31 +81,31 @@ while [[ -z $yn1 ]]; do
 										printf "\nYou need to insert your Hue Bridge Username below to continue.\n\n"
 										read -p "What is your Hue Bridge Username? It must have been showed above: " userName
 									done
-									sed -i "17ivar hueUsername = '$userName' //Enter Hue username inside of the quotes. You can get your username from setup.js" config.js
+									sed -i "17ilet hueUsername = \"$userName\"; //Enter Hue username inside of the quotes. You can get your username from setup.js" config.js
 
 									until does_it_exist "$TWchannel" >/dev/null; do
 										printf "\nYou need to insert your Twitch Channel Name below to continue.\n\n"
 										read -p "What is your Twitch Channel Name?: " TWchannel
 									done
-									sed -i "12i    channels: ["#$TWchannel"] // Enter channel name after #" config.js
+									sed -i "12i    channels: [\"\#$TWchannel\"] // Enter channel name after #" config.js
 
 									until does_it_exist "$TWuserName" >/dev/null; do
 										printf "\nYou need to insert your Twitch Bot's Username below to continue.\n\n"
 										read -p "What is your Twitch Bot's Username?: " TWuserName
 									done
-									sed -i "9i        username: "$TWuserName", // Enter username of the bot inside of quotes" config.js
+									sed -i "9i        username: \"$TWuserName\", // Enter username of the bot inside of quotes" config.js
 
 									until does_it_exist "$TWoauthPass" >/dev/null; do
 										printf "\nYou need to insert your Twitch Bot's oAuth key below to continue.\nYou need to go to https://twitchapps.com/tmi/ to get it.\n\n"
 										read -p "What is your Twitch Bot's oAuth key?: " TWoauthPass
 									done
-									sed -i "10i        password: "$TWoauthPass" // Get your bots oauth key from here https://twitchapps.com/tmi/" config.js
+									sed -i "10i        password: \"$TWoauthPass\" // Get your bots oauth key from here https://twitchapps.com/tmi/" config.js
 
 									until does_it_exist "$hueLamps" >/dev/null; do
 										printf "\nYou need to insert your Hue Lamps' IDs below to continue.\nExample without quotes, \"2, 4\"\n\n"
 										read -p "What is your Hue Lamps' IDs?: " hueLamps
 									done
-									sed -i "29ivar hueLamps = [$hueLamps] // You can put multiple Lamp ID's. (Example: var hueLamps = [2, 4])" config.js
+									sed -i "29ilet hueLamps = [$hueLamps] // You can put multiple Lamp ID's. (Example: let hueLamps = [2, 4])" config.js
 
 									sleep 1
 									printf "\nDone! You can do \"node bot.js\" to run your bot.\n\n"

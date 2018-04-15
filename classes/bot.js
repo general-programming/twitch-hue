@@ -13,7 +13,7 @@ const utils = require("./util/utils"); // eslint-disable-line no-unused-vars
 
 class TwitchBot extends tmi.Client {
     constructor(config = {}) {
-        super(config);
+        super(config.options);
         this.twhueOptions = config;
         this.logger = logger;
         this.twhue = new hueAPI({
@@ -21,6 +21,10 @@ class TwitchBot extends tmi.Client {
             port: 80, // Optional
             username: this.twhueOptions.hueUsername,
             timeout: 15000, // Optional, timeout in milliseconds (15000 is the default)
+        }, {
+            hueLamps: this.twhueOptions.hueLamps,
+            timeBetweenAlerts: this.twhueOptions.timeBetweenAlerts,
+            cheerOptions: this.twhueOptions.cheerOptions
         });
     }
 
@@ -29,17 +33,23 @@ class TwitchBot extends tmi.Client {
             this.on("connected", () => {
                 this.logger.log(`Successfully connected to ${this.twhueOptions.options.channels.join(", ")}`, "ready");
             });
-            this.addListener("disconnect", (reason) => {
+            this.on("disconnected", (reason) => {
                 this.logger.error(`Disconnected! Reason: ${reason}`);
             });
             this.on("resub", (channel, username, months) => {
                 this.logger.sub(`${username} resubbed for ${months} months!`); //Print username of the subscriber to console
                 this.twhue.initLamp("sub", months);
             });
-            this.on("cheer", function (channel, userstate) {
+            this.on("cheer", (channel, userstate) => {
                 if (userstate.bits >= this.twhueOptions.cheerLimit) { //If users bit amount is not bigger that Hue trigger amount dont go in. You can change this in config.js
                     this.twhue.initLamp("cheer", userstate.bits);
                 }
+            });
+            process.on("uncaughtException", (err) => {
+                this.logger.error(err);
+            });
+            process.on("unhandledRejection", (reason) => {
+                this.logger.error(reason);
             });
             resolve(true);
         });
