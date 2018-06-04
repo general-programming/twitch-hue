@@ -28,7 +28,7 @@ let timeBetweenAlerts = 3000; //Queue system delay
 
 let hueLamps = []; // You can put multiple Lamp ID's. (Example: let hueLamps = [2, 4])
 
-let cheerLimit = 100;
+let cheerLimit = cheerOptions.cheerTier1;
 
 module.exports = {
     options,
