@@ -1,7 +1,8 @@
 /*--------------------------------------------------------------
  *  Copyright (c) general-programming. All rights reserved.
  *  Licensed under the GNU General Public License.
- *  Author: linuxgemini
+ *
+ *  Authored by linuxgemini
  *-------------------------------------------------------------*/
 
 "use strict";
@@ -36,13 +37,14 @@ class TwitchBot extends tmi.Client {
             this.on("disconnected", (reason) => {
                 this.logger.error(`Disconnected! Reason: ${reason}`);
             });
-            this.on("resub", (channel, username, months) => {
+            this.on("resub", (channel, uname, months, msg, userstate) => {  // eslint-disable-line no-unused-vars
+                let username = userstate["login"] || uname;
                 this.logger.sub(`${username} resubbed for ${months} months!`); //Print username of the subscriber to console
                 this.twhue.initLamp("sub", months);
             });
             this.on("cheer", (channel, userstate) => {
                 if (userstate.bits >= this.twhueOptions.cheerLimit) { //If users bit amount is not bigger that Hue trigger amount dont go in. You can change this in config.js
-                    this.logger.cheer(`${userstate.username} has cheered ${userstate.bits} bit(s)!`);
+                    this.logger.cheer(`${userstate.login} has cheered ${userstate.bits} bit(s)!`);
                     this.twhue.initLamp("cheer", userstate.bits);
                 }
             });
