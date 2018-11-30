@@ -1,11 +1,14 @@
 /*--------------------------------------------------------------
  *  Copyright (c) general-programming. All rights reserved.
  *  Licensed under the GNU General Public License.
+ * 
+ *  Original file written by batubozkan and root0fallevil
+ *  Formatting change by linuxgemini
  *-------------------------------------------------------------*/
 
 "use strict";
 
-module.exports = {
+const colors = {
     normal: {
         isRandom: false,
         brightness: 191,
@@ -77,3 +80,5 @@ module.exports = {
         faded_brightness: 150
     }
 };
+
+module.exports = colors;

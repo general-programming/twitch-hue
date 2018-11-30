@@ -21,7 +21,7 @@ let cheerOptions = {
     cheerTier2: 1000,
     cheerTier3: 5000,
     cheerTier4: 10000
-    //cheerTier5: 10 (EXAMPLE)
+    //(EXAMPLE) cheerTier5: 100000
 };
 
 let timeBetweenAlerts = 3000; //Queue system delay

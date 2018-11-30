@@ -1,4 +1,14 @@
-module.exports = {
+/*--------------------------------------------------------------
+ *  Copyright (c) general-programming. All rights reserved.
+ *  Licensed under the GNU General Public License.
+ * 
+ *  Original file written by batubozkan and root0fallevil
+ *  Module conversion by linuxgemini
+ *-------------------------------------------------------------*/
+
+"use strict";
+
+const effects = {
     normal: {
         colorName: "normal",
         blinkTime: 1,
@@ -50,3 +60,5 @@ module.exports = {
         blinkMS: 200
     }
 };
+
+module.exports = effects;

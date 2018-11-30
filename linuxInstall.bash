@@ -7,7 +7,7 @@
 clear
 
 function test_command {
-	if hash $1 2>/dev/null; then
+	if hash "$1" 2>/dev/null; then
 		return 0
 	else
 		echo "$1"

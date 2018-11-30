@@ -5,12 +5,9 @@
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2017,
+        "ecmaVersion": 2018,
         "sourceType": "module",
-        "impliedStrict": true,
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true
-        }
+        "impliedStrict": true
     },
     "rules": {
         "indent": [
