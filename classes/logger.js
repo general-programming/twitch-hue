@@ -3,6 +3,7 @@
  *  Licensed under the GNU General Public License.
  *
  *  Authored by linuxgemini
+ *  Original code written by eslachance
  *-------------------------------------------------------------*/
 
 "use strict";
